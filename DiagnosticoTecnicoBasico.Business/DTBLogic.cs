@@ -68,18 +68,18 @@ namespace DiagnosticoTecnicoBasico.Business
             return requestDTB;
         }
 
-        public static List<ProductResponse> GetResponseDTB(ResponseDTB responseDTB)
+        public static List<DiagnostivoTecnicoBasico.Model.ResponseAPI.Product> GetResponseDTB(ResponseDTB responseDTB)
         {
-            List<ProductResponse> productResponseList = new List<ProductResponse>();
+            List<DiagnostivoTecnicoBasico.Model.ResponseAPI.Product> productResponseList = new List<DiagnostivoTecnicoBasico.Model.ResponseAPI.Product>();
             List<RelatedProductTestRes> relatedProductTestList = responseDTB.relatedProductTest;
 
             foreach (RelatedProductTestRes relatedProductTest in relatedProductTestList)
             {
-                List<ServicioResponse> servicioResponseList = new List<ServicioResponse>();
+                List<Servicio> servicioResponseList = new List<Servicio>();
 
                 foreach (TestDiagnosis testDiagnosis in relatedProductTest.testDiagnosis)
                 {
-                    ServicioResponse servicioResponse = new ServicioResponse()
+                    Servicio servicioResponse = new Servicio()
                     {
                         name = testDiagnosis.name,
                         descripcion = testDiagnosis.verCode.descr,
@@ -89,7 +89,7 @@ namespace DiagnosticoTecnicoBasico.Business
                     servicioResponseList.Add(servicioResponse);
                 }
 
-                ProductResponse productResponse = new ProductResponse()
+                DiagnostivoTecnicoBasico.Model.ResponseAPI.Product productResponse = new DiagnostivoTecnicoBasico.Model.ResponseAPI.Product()
                 {
                     name = relatedProductTest.name,
                     servicio = servicioResponseList

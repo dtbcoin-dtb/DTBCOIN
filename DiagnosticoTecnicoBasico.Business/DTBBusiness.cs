@@ -13,16 +13,21 @@ namespace DiagnosticoTecnicoBasico.Business
 {
     public class DTBBusiness
     {
-        public static List<ProductResponse> GetCustometSiteProductTest(string idSubscriber, string idDomicilio)
+        public static List<DiagnostivoTecnicoBasico.Model.ResponseAPI.Product> GetCustometSiteProductTest(string idSubscriber, string idDomicilio)
         {
-            List<ProductResponse> productResponseList = new List<ProductResponse>();
+            List<DiagnostivoTecnicoBasico.Model.ResponseAPI.Product> productResponseList = new List<DiagnostivoTecnicoBasico.Model.ResponseAPI.Product>();
             string idUnico = Utilities.GenerarIdUnicoDiagnostico();
-            DTBResponseEntity consultaDTB = IntegracionDTB.GetConsultaDTB(idSubscriber, idDomicilio);
-
-            RequestDTB requestDTB = DTBLogic.GetRequestDTB(consultaDTB, idUnico, idSubscriber, idDomicilio);
-            ResponseDTB response = IntegracionDTB.GetCustometSiteProductTest(requestDTB, idUnico);
-
-            productResponseList = DTBLogic.GetResponseDTB(response);
+            try
+            {
+                DTBResponseEntity consultaDTB = IntegracionDTB.GetConsultaDTB(idSubscriber, idDomicilio);
+                RequestDTB requestDTB = DTBLogic.GetRequestDTB(consultaDTB, idUnico, idSubscriber, idDomicilio);
+                ResponseDTB response = IntegracionDTB.GetCustometSiteProductTest(requestDTB, idUnico);
+                productResponseList = DTBLogic.GetResponseDTB(response);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
 
             return productResponseList;
         }

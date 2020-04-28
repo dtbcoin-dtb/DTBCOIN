@@ -4,10 +4,9 @@ using System.Text;
 
 namespace DiagnostivoTecnicoBasico.Model.ResponseAPI
 {
-    public class ServicioResponse
+    public class Product
     {
         public string name { get; set; }
-        public string descripcion { get; set; }
-        public string severity { get; set; }
+        public List<Servicio> servicio { get; set; }
     }
 }
